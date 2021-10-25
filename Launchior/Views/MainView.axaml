@@ -1,0 +1,96 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Launchior.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="Launchior.Views.MainView">
+
+    <Design.DataContext>
+        <vm:MainViewModel/>
+    </Design.DataContext>
+
+    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*" Margin="5">
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+            <StackPanel.Styles>
+                <Style Selector="Button">
+                    <Setter Property="Width" Value="90"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                </Style>
+            </StackPanel.Styles>
+            <Button Content="Add"/>
+            <Button Content="Duplicate"/>
+            <Button Content="Delete"/>
+        </StackPanel>
+        <ListBox Grid.Row="1" Grid.Column="0" 
+                 Items="{Binding Shortcuts}" 
+                 SelectionChanged="Shortcuts_OnSelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,0,0,5" Orientation="Horizontal">
+            <Button Content="Load Items"/>
+        </StackPanel>
+        <Border 
+            Grid.Row="1" 
+            Grid.Column="1" 
+            BorderBrush="Gray" 
+            BorderThickness="1" 
+            CornerRadius="2" 
+            Padding="10,0,10,10"
+            Margin="5,0,0,0">
+            <Grid 
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,*"
+                ColumnDefinitions="*,*,2*"
+                DataContext="{Binding SelectedAppShortCut}">
+                <Grid.Styles>
+                    <Style Selector="TextBlock">
+                        <Setter Property="Margin" Value="0,10,0,5"/>
+                    </Style>
+                    <Style Selector="TextBox">
+                        <Setter Property="Margin" Value="0,0,5,0"/>
+                    </Style>
+                </Grid.Styles>
+                <TextBlock Text="Name"/>
+                <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Name}"/>
+                
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Terminal"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Terminal}"/>
+                
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Custom Attributes"/>
+                <TextBox Grid.Row="1" Grid.RowSpan="11" Grid.Column="2" 
+                         Margin="0" 
+                         FontFamily="Monospace Regular"
+                         Text="{Binding CustomAttributes}"/>
+                
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Type"/>
+                <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding ShortcutType}"/>
+                
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="No Display"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding NoDisplay}"/>
+                
+                <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Text="Comment"/>
+                <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Comment}"/>
+                
+                <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="Execution File"/>
+                <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding ExecutionFile}"/>
+                
+                <TextBlock Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Text="Icon File"/>
+                <TextBox Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding IconFile}"/>
+                
+                <TextBlock Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Text="Categories"/>
+                <TextBox Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Categories}"/>
+                
+                <TextBlock Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="3" Text="Preview"/>
+                <TextBox Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="3" 
+                         Margin="0" 
+                         FontFamily="Monospace Regular"
+                         Text="{Binding Preview}" />
+            </Grid>
+        </Border>
+        
+    </Grid>
+</UserControl>
